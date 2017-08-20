@@ -3,7 +3,7 @@
 <div class="pageheader">
     <h1 class="pagetitle">用户管理</h1>
     <ul class="hornav">
-        <li><a href="/lvs/ucenter/user/list">用户列表</a></li>
+        <li><a href="/user/list">用户列表</a></li>
         <li class="current"><a href=""><?php echo empty($user)?'添加账号':'编辑账号'?></a></li>
     </ul>
 </div>

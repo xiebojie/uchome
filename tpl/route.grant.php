@@ -3,10 +3,10 @@
 <div class="pageheader">
     <h1 class="pagetitle">权限管理</h1>
     <ul class="hornav">
-        <li><a href="/lvs/ucenter/role/list">角色列表</a></li>
-        <li><a href="/lvs/ucenter/role/form">添加角色</a></li>
-        <li><a href="/lvs/ucenter/route/list">路由列表</a></li>
-        <li><a href="/lvs/ucenter/route/form">添加路由</a></li>
+        <li><a href="/role/list">角色列表</a></li>
+        <li><a href="/role/form">添加角色</a></li>
+        <li><a href="/route/list">路由列表</a></li>
+        <li><a href="/route/form">添加路由</a></li>
         <li class="current"><a href="">路由授权</a></li>
     </ul>
 </div>
@@ -35,22 +35,22 @@
             <th width="130">操作</th>
         </tr>
         <tr>
-            <th><div class="checkbox"><label><input type="checkbox" name="app_id"/> 软件开放平台</label></div></th>
+            <th><div class="checkbox"><label><input type="checkbox" name="app_id"/>软件发布</label></div></th>
             <td>
                 <div class="checkbox">
-                 <label><input type="checkbox" name="route_ids[]" /> 需要分析的软件</label>
-                <label><input type="checkbox" name="route_ids[]" /> 需要分析的软件</label>
+                 <label><input type="checkbox" name="route_ids[]" />舒服的沙发</label>
+                <label><input type="checkbox" name="route_ids[]" /> 需件</label>
                 </div>
             </td>
             <td align="center"><a href="" class="btn btn-primary ajax-post">提交</a></td>
         </tr>
         <?php foreach ($route_list as $_appid=>$_routes):?>
         <tr>
-            <td class="checkbox"><label><input type="checkbox" name="app_id"/>软件开放平台</label></td>
+            <td class="checkbox"><label><input type="checkbox" name="app_id"/>软台</label></td>
             <td class="checkbox">
-                <label><input type="checkbox" name="route_ids[]" />需要分析的软件</label>
-                <label><input type="checkbox" name="route_ids[]" />需要分析的软件</label>
-                <label><input type="checkbox" name="route_ids[]" />需要分析的软件</label>
+                <label><input type="checkbox" name="route_ids[]" />需件</label>
+                <label><input type="checkbox" name="route_ids[]" />需件</label>
+                <label><input type="checkbox" name="route_ids[]" />需件</label>
             </td>
             <td align="center"><a href="" class="btn btn-primary ajax-post">提交</a></td>
         </tr>

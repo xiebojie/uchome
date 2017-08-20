@@ -8,7 +8,7 @@
     <body>
         <div class="container text-center" style="text-align:center;margin: 0 auto;margin-top:13%;color:#4e627a;line-height:32px;">
             <h2 style="font-size: 18px;">
-                <?php echo empty($msg)?'抱歉，系统错误，请联系开放人员 谢伯杰 xiebojie@360.cn':$msg?>
+                <?php echo empty($msg)?'抱歉，系统错误，请联系管理员':$msg?>
             </h2>
         </div>
     </body>

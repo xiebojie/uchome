@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-        <title>用户信任 404</title>
+        <title>uchome 404</title>
     </head>
     <body>
         <div class="container text-center" style="text-align: center;  margin: 0 auto;  margin-top: 13%; color: #4e627a;  line-height: 32px;  font-size: 10px;">

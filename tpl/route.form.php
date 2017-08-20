@@ -3,10 +3,10 @@
 <div class="pageheader">
     <h1 class="pagetitle">路由管理</h1>
     <ul class="hornav">
-        <li><a href="/lvs/ucenter/role/list">角色列表</a></li>
-        <li ><a href="/lvs/ucenter/role/form">添加角色</a></li>
-        <li><a href="/lvs/ucenter/route/list">路由列表</a></li>
-        <li class="current"><a href="/lvs/ucenter/route/form">添加路由</a></li>
+        <li><a href="/role/list">角色列表</a></li>
+        <li ><a href="/role/form">添加角色</a></li>
+        <li><a href="/route/list">路由列表</a></li>
+        <li class="current"><a href="/route/form">添加路由</a></li>
     </ul>
 </div>
 <div class="contentpanel">
