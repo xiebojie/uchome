@@ -1,4 +1,5 @@
 <?php
+
 define('BASEPATH', dirname(dirname(__FILE__)).'/');
 define('TPLPATH', BASEPATH.'tpl/');
 date_default_timezone_set('PRC');
