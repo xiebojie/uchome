@@ -28,12 +28,6 @@
             </div>
         </div>
         <div class="form-group">
-            <label  class="col-sm-1 control-label">部门</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control"  data-rule="required" name="department" value="{%$user['department']|default:''%}"/>
-            </div>
-        </div>
-        <div class="form-group">
             <label  class="col-sm-1 control-label">角色</label>
             <div class="col-sm-10 checkbox">
                 <label class="text-danger"><input type="checkbox"/>管理员</label>

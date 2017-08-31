@@ -47,7 +47,7 @@
             <th>email</th>
             <th>状态</th>
             <th>角色</th>
-            <th>部门</th>
+            <th>邀请码</th>
             <th>管理员</th>
             <th>备注</th>
             <th>时间戳</th>
@@ -61,7 +61,7 @@
             <td>{%$_user['email']%}</td>
             <td><?php echo user_model::$status_list[$_user['status']]?></td>
             <td>{%$_user['role_name']%}</td>
-            <td>{%$_user['department']%}</td>
+            <td>{%$_user['invitation']%}</td>
             <td>{%$_user['is_admin']?'是':'否'%}</td>
             <td>{%$_user['remark']%}</td>
             <td>{%$_user['ctime']%}</td>

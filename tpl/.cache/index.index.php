@@ -28,7 +28,6 @@
                     <li style="border-top: 0.5px solid #e7e7e7">
                         <a href="/"><i class="glyphicon glyphicon-home"></i>首页</a>
                     </li>
-                    <li class="parent"><a href="/widget">widget</a></li>
                     <li class="parent">
                         <a>应用管理</a>
                         <ul class="children">
@@ -41,7 +40,7 @@
                     <ul class="children"> 
                         <li><a href="/role/list">角色列表</a></li>
                         <li><a href="/role/form">添加角色</a></li>
-                        <li><a href="／route/list">路由列表</a></li>
+                        <li><a href="/route/list">路由列表</a></li>
                         <li><a href="/route/form">添加路由</a></li>
                         <li><a href="/route/grant">路由授权</a></li>
                     </ul>
