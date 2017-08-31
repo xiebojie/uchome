@@ -3,8 +3,8 @@
 <div class="pageheader">
     <h1 class="pagetitle">用户管理</h1>
     <ul class="hornav">
-        <li class="current"><a href="/lvs/ucenter/user/list">用户列表</a></li>
-        <li><a href="/lvs/ucenter/user/form">添加账号</a></li>
+        <li class="current"><a href="/user/list">用户列表</a></li>
+        <li><a href="/user/form">添加账号</a></li>
     </ul>
 </div>
 <div class="contentpanel">
@@ -79,7 +79,7 @@
             </td>
         </tr>
         <?php endforeach;?>
-        </table>
+    </table>
 </div>
 <script>
 

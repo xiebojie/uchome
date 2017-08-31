@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <link rel="icon" href="/style/images//favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-        <title>{%$title|default:'uchome'%}</title>
+        <title><?php echo htmlspecialchars(empty($title)?'uchome':$title);?></title>
         <link href="/style/bootstrap.min.css" rel="stylesheet"/>
         <link href="/style/bootstrap.datepicker.css" rel="stylesheet"/>
         <link href="/style/ucbase.css" rel="stylesheet"/>
@@ -15,7 +15,7 @@
             <div class="navbar-brand" style="font-size:28px;color:#fff">uchome</div>
               <div class="pull-right whoami">
                    <a class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-user"></span>{%$username|default:''%}
+                    <span class="glyphicon glyphicon-user"></span><?php echo htmlspecialchars(empty($username)?'':$username);?>
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="/user/logout">退出</a></li>
@@ -55,7 +55,59 @@
             </ul>
         </div>
         <div class="mainpanel">
-            {%block main%}{%endblock%}
+            <div class="pageheader">
+    <h1 class="pagetitle">用户管理</h1>
+    <ul class="hornav">
+        <li><a href="/user/list">用户列表</a></li>
+        <li class="current"><a href=""><?php echo empty($user)?'添加账号':'编辑账号'?></a></li>
+    </ul>
+</div>
+<div class="contentpanel">
+    <form class="form-horizontal mt20" role="form" method="post">
+        <div class="form-group">
+            <label class="col-sm-1 control-label">用户名</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" data-rule="required" name="username" value="<?php echo htmlspecialchars(empty($user['username'])?'':$user['username']);?>"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-1 control-label">手机号</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" data-rule="required" name="mobile" value="<?php echo htmlspecialchars(empty($user['mobile'])?'':$user['mobile']);?>"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-1 control-label">Email</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control"  data-rule="required" name="email" value="<?php echo htmlspecialchars(empty($user['email'])?'':$user['email']);?>"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-1 control-label">部门</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control"  data-rule="required" name="department" value="<?php echo htmlspecialchars(empty($user['department'])?'':$user['department']);?>"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-1 control-label">角色</label>
+            <div class="col-sm-10 checkbox">
+                <label class="text-danger"><input type="checkbox"/>管理员</label>
+            </div>
+        </div>
+        <div class="form-group">
+        <label  class="col-sm-1 control-label">备注</label>
+            <div class="col-sm-10">
+                <textarea class="form-control"  name="remark"><?php echo htmlspecialchars(empty($user['remark'])?'':$user['remark']);?></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-1 control-label"></label>
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-success">提 交</button>
+            </div>
+        </div>
+    </form>
+</div>
         </div>
     </div>
     <script src="/script/bootstrap.js"></script>

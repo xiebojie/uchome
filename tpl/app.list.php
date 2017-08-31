@@ -1,4 +1,4 @@
-%extend base.inc.php%}
+{%extend base.inc.php%}
 {%block main%}
 <div class="pageheader">
     <h1 class="pagetitle">应用管理</h1>

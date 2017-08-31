@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <link rel="icon" href="/style/images//favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-        <title>{%$title|default:'uchome'%}</title>
+        <title><?php echo htmlspecialchars(empty($title)?'uchome':$title);?></title>
         <link href="/style/bootstrap.min.css" rel="stylesheet"/>
         <link href="/style/bootstrap.datepicker.css" rel="stylesheet"/>
         <link href="/style/ucbase.css" rel="stylesheet"/>
@@ -15,7 +15,7 @@
             <div class="navbar-brand" style="font-size:28px;color:#fff">uchome</div>
               <div class="pull-right whoami">
                    <a class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-user"></span>{%$username|default:''%}
+                    <span class="glyphicon glyphicon-user"></span><?php echo htmlspecialchars(empty($username)?'':$username);?>
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="/user/logout">退出</a></li>
@@ -28,6 +28,7 @@
                     <li style="border-top: 0.5px solid #e7e7e7">
                         <a href="/"><i class="glyphicon glyphicon-home"></i>首页</a>
                     </li>
+                    <li class="parent"><a href="/widget">widget</a></li>
                     <li class="parent">
                         <a>应用管理</a>
                         <ul class="children">
@@ -40,7 +41,7 @@
                     <ul class="children"> 
                         <li><a href="/role/list">角色列表</a></li>
                         <li><a href="/role/form">添加角色</a></li>
-                        <li><a href="/route/list">路由列表</a></li>
+                        <li><a href="／route/list">路由列表</a></li>
                         <li><a href="/route/form">添加路由</a></li>
                         <li><a href="/route/grant">路由授权</a></li>
                     </ul>
@@ -55,7 +56,7 @@
             </ul>
         </div>
         <div class="mainpanel">
-            {%block main%}{%endblock%}
+            
         </div>
     </div>
     <script src="/script/bootstrap.js"></script>

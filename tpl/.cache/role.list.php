@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <link rel="icon" href="/style/images//favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-        <title>{%$title|default:'uchome'%}</title>
+        <title><?php echo htmlspecialchars(empty($title)?'uchome':$title);?></title>
         <link href="/style/bootstrap.min.css" rel="stylesheet"/>
         <link href="/style/bootstrap.datepicker.css" rel="stylesheet"/>
         <link href="/style/ucbase.css" rel="stylesheet"/>
@@ -15,7 +15,7 @@
             <div class="navbar-brand" style="font-size:28px;color:#fff">uchome</div>
               <div class="pull-right whoami">
                    <a class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-user"></span>{%$username|default:''%}
+                    <span class="glyphicon glyphicon-user"></span><?php echo htmlspecialchars(empty($username)?'':$username);?>
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="/user/logout">退出</a></li>
@@ -55,7 +55,58 @@
             </ul>
         </div>
         <div class="mainpanel">
-            {%block main%}{%endblock%}
+            <div class="pageheader">
+    <h1 class="pagetitle">权限管理</h1>
+    <ul class="hornav">
+        <li class="current"><a href="/role/list">角色列表</a></li>
+        <li><a href="/role/form">添加角色</a></li>
+        <li><a href="/route/list">路由列表</a></li>
+        <li><a href="/route/form">添加路由</a></li>
+    </ul>
+</div>
+<div class="contentpanel">
+    <form class="search-form">
+        <table class="search-table" style="width: 680px">
+            <tr>
+                <th>id</th>
+                <td><input type="text" class="form-control" name="id" /></td>
+                <th>名称</th>
+                <td><input type="role_name" class="form-control" name="id" /></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><button type="submit" class="btn btn-primary">查 询</button></td>
+            </tr>
+        </table>
+        <input type="hidden" name="psize" value="<?php echo htmlspecialchars($psize);?>"/>
+        <input type="hidden" name="page" value="<?php echo htmlspecialchars($page);?>"/>
+        <input type="hidden" id="total_page" value="<?php echo htmlspecialchars(ceil($total/$psize));?>"/>
+    </form>
+    <div class="js-pager pull-right"><span class="total">总数：<?php echo htmlspecialchars(number_format($total));?></span></div>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>id</th>
+            <th>角色名</th>
+            <th>备注</th>
+            <th>操作人</th>
+            <th width="160">时间戳</th>
+            <th width="190">操作</th>
+        </tr>
+        <?php foreach ($role_list as $_role):?>
+        <tr>
+        <td><?php echo htmlspecialchars($_role['id']);?></td>
+            <td><?php echo htmlspecialchars($_role['role_name']);?></td>
+            <td><?php echo htmlspecialchars($_role['remark']);?></td>
+            <td><?php echo htmlspecialchars($_role['auditor']);?></td>
+            <td><?php echo htmlspecialchars($_role['utime']);?></td>
+            <td>
+                <a href="/route/grant?role_id=<?php echo htmlspecialchars($_role['id']);?>" class="btn btn-warning"> 授权</a>
+                <a href="./delete/<?php echo htmlspecialchars($_role['id']);?>" class="btn btn-danger ajax-post" data-confirm="确定要删除吗">删除</a>
+            </td>
+        </tr>
+        <?php endforeach;?>
+    </table>
+</div>
         </div>
     </div>
     <script src="/script/bootstrap.js"></script>

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <link rel="icon" href="/style/images//favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-        <title>{%$title|default:'uchome'%}</title>
+        <title><?php echo htmlspecialchars(empty($title)?'uchome':$title);?></title>
         <link href="/style/bootstrap.min.css" rel="stylesheet"/>
         <link href="/style/bootstrap.datepicker.css" rel="stylesheet"/>
         <link href="/style/ucbase.css" rel="stylesheet"/>
@@ -15,7 +15,7 @@
             <div class="navbar-brand" style="font-size:28px;color:#fff">uchome</div>
               <div class="pull-right whoami">
                    <a class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-user"></span>{%$username|default:''%}
+                    <span class="glyphicon glyphicon-user"></span><?php echo htmlspecialchars(empty($username)?'':$username);?>
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="/user/logout">退出</a></li>
@@ -55,7 +55,37 @@
             </ul>
         </div>
         <div class="mainpanel">
-            {%block main%}{%endblock%}
+            <div class="pageheader">
+    <h1 class="pagetitle">角色管理</h1>
+    <ul class="hornav">
+        <li><a href="/role/list">角色列表</a></li>
+        <li class="current"><a href="/role/form">添加角色</a></li>
+        <li><a href="/route/list">路由列表</a></li>
+        <li><a href="/route/form">添加路由</a></li>
+    </ul>
+</div>
+<div class="contentpanel">
+    <form class="form-horizontal mt20" role="form" method="post">
+        <div class="form-group">
+            <label class="col-sm-1 control-label">角色名</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" data-rule="required" name="role_name" value="<?php echo htmlspecialchars(empty($role['role_name'])?'':$role['role_name']);?>"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-1 control-label">备注</label>
+            <div class="col-sm-10">
+                <textarea class="form-control"  data-rule="required" name="remark" value="<?php echo htmlspecialchars(empty($role['remark'])?'':$role['remark']);?>"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-1 control-label"></label>
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-success">提 交</button>
+            </div>
+        </div>
+    </form>
+</div>
         </div>
     </div>
     <script src="/script/bootstrap.js"></script>
