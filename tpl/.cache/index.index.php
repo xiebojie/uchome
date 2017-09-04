@@ -28,30 +28,17 @@
                     <li style="border-top: 0.5px solid #e7e7e7">
                         <a href="/"><i class="glyphicon glyphicon-home"></i>首页</a>
                     </li>
-                    <li class="parent">
-                        <a>应用管理</a>
-                        <ul class="children">
-                            <li><a href="/app/list">应用列表</a></li>
-                            <li><a href="/app/form">添加应用</a></li>
-                        </ul>
-                    </li>
-                    <li class="parent">
-                    <a>权限管理</a>
-                    <ul class="children"> 
-                        <li><a href="/role/list">角色列表</a></li>
-                        <li><a href="/role/form">添加角色</a></li>
-                        <li><a href="/route/list">路由列表</a></li>
-                        <li><a href="/route/form">添加路由</a></li>
-                        <li><a href="/route/grant">路由授权</a></li>
-                    </ul>
-                </li>
-                <li class="parent">
-                    <a>用户管理</a>
-                    <ul class="children">
-                        <li><a href="/user/list">用户列表</a></li>
-                        <li><a href="/user/form">添加用户</a></li>
-                    </ul>
-                </li>
+           
+                   <li class="parent"><a href="/app/list">应用列表</a></li>
+                            <li class="parent"><a href="/app/form">添加应用</a></li>
+                        <li class="parent"><a href="/role/list">角色列表</a></li>
+                        <li class="parent"><a href="/role/form">添加角色</a></li>
+                        <li class="parent"><a href="/route/list">路由列表</a></li>
+                        <li class="parent"><a href="/route/form">添加路由</a></li>
+                        <li class="parent"><a href="/route/grant">路由授权</a></li>
+                   
+                <li class="parent"><a href="/user/list">用户列表</a></li>
+                        <li class="parent"><a href="/user/form">添加用户</a></li>
             </ul>
         </div>
         <div class="mainpanel">
