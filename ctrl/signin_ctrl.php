@@ -1,8 +1,12 @@
 <?php 
-/**
-* 使用邀请码机制，用户登录时检查是否已设置密码如果没有那么就要求填写邀请码，
-* 然后就登录成功同时设置密码，如果需要修改密码让管理员后台重置密码就可以了
-*/
+/*!
+ * uchome project
+ *
+ * Copyright 2017 xiebojie@qq.com
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ */
 class signin_ctrl extends ctrl
 {
     protected $model;
