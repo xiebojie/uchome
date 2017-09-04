@@ -48,7 +48,6 @@ class app_ctrl extends ctrl
                 $valid_data['auditor']=  $this->username;
                 $valid_data['utime']= 'timestamp';
                 if (empty($app))
-                if (empty($app))
                 {
                     $valid_data['ctime']= 'timestamp';
                     $app_id = $this->model->insert($valid_data);
@@ -56,7 +55,7 @@ class app_ctrl extends ctrl
                 {
                     $this->model->update($app_id, $valid_data);
                 }
-                return redirect('./list');
+                return redirect('/app/list');
             }else
             {
                 echo implode(',', $valid_error);

@@ -41,11 +41,13 @@ class user_ctrl extends ctrl
             list($valid_data, $valid_error) = $validator->validate($_POST, $valid_fields);
             if (empty($valid_error))
             {
-                $valid_data['operator']=  $this->user;
+                $valid_data['operator']= $this->username;
+                $valid_data['utime'] = 'timestamp';
                 if (empty($user))
                 {
-                    $valid_data['ctime']= 'timestamp';
+                    $valid_data['ctime'] = 'timestamp';
                     $valid_data['status']= user_model::STATUS_DISABLE;
+                    $valid_data['invitation'] = substr(sha1(time()),0, 6);
                     $user_id = $this->model->insert($valid_data);
                 }else
                 {
@@ -62,6 +64,17 @@ class user_ctrl extends ctrl
     }
 
     public function disable()
+    {
+        $uid = isset($_REQUEST['id'])?$_REQUEST['id']:-1;
+        $status = isset($_REQUEST['status'])?$_REQUEST['status']:user_model::STATUS_DISABLE;
+        $user = $this->model->fetch($uid);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'&& !empty($user))
+        {
+            $this->model->set_status($uid,$status);
+        }
+    }
+    
+    public function passwd()
     {
         $uid = isset($_REQUEST['id'])?$_REQUEST['id']:-1;
         $status = isset($_REQUEST['status'])?$_REQUEST['status']:user_model::STATUS_DISABLE;

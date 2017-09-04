@@ -22,12 +22,6 @@
             </div>
         </div>
         <div class="form-group">
-            <label  class="col-sm-1 control-label">应用密钥</label>
-            <div class="col-sm-10">
-                <textarea name="public_key">{%$app['public_key']%}</textarea>
-            </div>
-        </div>
-        <div class="form-group">
             <label  class="col-sm-1 control-label"></label>
             <div class="col-sm-10">
                 <button type="submit" class="btn btn-success">提 交</button>
