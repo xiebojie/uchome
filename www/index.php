@@ -1,5 +1,4 @@
 <?php
-
 define('BASEPATH', dirname(dirname(__FILE__)).'/');
 define('TPLPATH', BASEPATH.'tpl/');
 date_default_timezone_set('PRC');
@@ -9,7 +8,128 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
 
-include BASEPATH.'/daemon/uboot.inc.php';
+define('MYSQL_HOST','localhost');
+define('MYSQL_PORT','3306');
+define('MYSQL_USER','root');
+define('MYSQL_PASSWD','ppiao');
+define('MYSQL_DBNAME','uchome');
+//include BASEPATH.'/daemon/uboot.inc.php';
+
+ini_set('default_socket_timeout', -1);
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+function autoload($class)
+{
+    if (stripos($class, "redis") === false)
+    {
+        $path = BASEPATH . 'model/' . $class . '.php';
+        if (file_exists($path))
+        {
+            require $path;
+        }else
+        {
+            $class = str_replace("\\", '/', $class);
+            require BASEPATH . 'lib/' . $class . '.php';
+        }
+    }
+}
+
+spl_autoload_register('autoload', true, false);
+
+function error_handler($errno, $errstr, $errfile, $errline)
+{
+}
+
+function get_mydb()
+{
+    static $dbh = null;
+    if (!$dbh)
+    {
+       // $dbh = new mysql('localhost', 'root', 'ppiao', 'uchome', 3306);
+        $dbh = new mysql(MYSQL_HOST,MYSQL_USER,MYSQL_PASSWD,MYSQL_DBNAME,MYSQL_PORT);
+    }
+    return $dbh;
+}
+
+
+function http_request($url, $method = "GET", $payload = null, $user = '', $passwd = '')
+{
+    $url_parts = parse_url($url);
+    $conn = curl_init();
+    curl_setopt($conn, CURLOPT_URL, $url);
+    curl_setopt($conn, CURLOPT_TIMEOUT, 5);
+    curl_setopt($conn, CURLOPT_PORT, $url_parts['port']);
+    curl_setopt($conn, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($conn, CURLOPT_CUSTOMREQUEST, strtoupper($method));
+    curl_setopt($conn, CURLOPT_FORBID_REUSE, 0);
+    if (!empty($user) && !empty($passwd))
+    {
+        curl_setopt($conn, CURLOPT_USERPWD, $user . ':' . $passwd);
+    }
+    if (is_array($payload) && count($payload) > 0)
+    {
+        curl_setopt($conn, CURLOPT_POSTFIELDS, http_build_query($payload));
+    }else
+    {
+        curl_setopt($conn, CURLOPT_POSTFIELDS, $payload);
+    }
+    $response = curl_exec($conn);
+    $htppcode = curl_getinfo($conn, CURLINFO_HTTP_CODE);
+    if ($htppcode == 200 || $response !== false)
+    {
+        $data = json_decode($response, true);
+        if (!$data)
+        {
+            return $response;
+        }
+        return $data;
+    }else
+    {
+        trigger_error( curl_errno($conn),E_USER_WARNING);
+    }
+    return $data;
+}
+
+
+function ssl_encrypt($source, $key)
+{
+    $maxlength = 52;
+    $output = '';
+    while ($source)
+    {
+        $input = substr($source, 0, $maxlength);
+        $source =substr($source,$maxlength);
+        if(openssl_public_encrypt($input, $encrypted, $key))
+        {
+            $output.=$encrypted;
+        }else
+        {
+            trigger_error("ssl encrypt failed ");
+        }
+    }
+    return base64_encode($output);
+}
+
+function ssl_decrypt($source, $key)
+{
+    $maxlength = 64;
+    $output = '';
+    $source = base64_decode($source);
+    while ($source)
+    {
+        $input = substr($source, 0, $maxlength);
+        $source = substr($source, $maxlength);
+        if(openssl_private_decrypt($input, $out, $key))
+        {
+            $output.=$out;
+        }else
+        {
+            trigger_error("ssl decrypt failed");
+        }
+    }
+    return $output;
+}
 
 function uri_route()
 {

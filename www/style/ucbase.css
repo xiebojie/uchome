@@ -327,11 +327,17 @@
     font-weight: 500;
     margin-right: -15px;
 }
-input[type=text],textarea{
+input[type=text],input[type=password],textarea{
+    width: 280px !important;
+    vertical-align: top;
+    margin-right: 8px;
+}
+input[type=password]{
     width: 280px;
     vertical-align: top;
     margin-right: 8px;
 }
+
 .form-alert{
     padding-left: 10px;
     line-height: 30px;
