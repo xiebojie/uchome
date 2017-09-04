@@ -1,7 +1,7 @@
 <?php
-class statis_model extends model
+class widget_model extends model
 {
-    protected $primary_table = 'ucenter_statis';
+    protected $primary_table = 'uc_widget';
     protected $primary_key = 'id';
     
     const STATUS_DISABLE=0;

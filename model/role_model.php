@@ -1,7 +1,7 @@
 <?php
 class role_model extends model
 {
-    protected $primary_table = 'ucenter_role';
+    protected $primary_table = 'uc_role';
     protected $primary_key = 'id';
     
     const STATUS_DISABLE=0;

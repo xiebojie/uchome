@@ -1,7 +1,7 @@
 <?php
 class app_model extends model
 {
-    protected $primary_table = 'ucenter_app';
+    protected $primary_table = 'uc_app';
     protected $primary_key = 'id';
     
     const STATUS_DISABLE=0;

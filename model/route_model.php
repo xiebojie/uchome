@@ -1,7 +1,7 @@
 <?php
 class route_model extends model
 {
-    protected $primary_table = 'ucenter_route';
+    protected $primary_table = 'uc_route';
     protected $primary_key = 'id';
     
     const STATUS_DISABLE=0;
