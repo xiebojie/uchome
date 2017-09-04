@@ -1,4 +1,12 @@
 <?php
+/*!
+ * uchome project
+ *
+ * Copyright 2017 xiebojie@qq.com
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ */
 class app_model extends model
 {
     protected $primary_table = 'uc_app';
