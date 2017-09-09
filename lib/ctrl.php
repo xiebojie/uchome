@@ -11,39 +11,31 @@ abstract class ctrl
 {
     protected $tpl_vars= array();
     protected $layout;
-    protected $username;
-    protected $user_id;
     protected $auth_pass=false;
     protected $user_model ;
+    
+    protected $user_id;
+    protected $role;
+    protected $username;
+    protected $is_admin;
 
     public function __construct()
     {  
         $this->user_model = new user_model();
         if (empty($this->auth_pass))
         {
-           /* if(empty($_SESSION['username']))
-            {  
-                $ldap_user = ldap_login();
-                if (!empty($ldap_user))
-                {
-                    $_SESSION['username'] = $ldap_user['user'];
-                } 
-            }
-          
-            $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
-            $user = $this->user_model->fetch_by_username($username);
-            if(empty($user))
+            if(!empty($_SESSION['signin']))
             {
-                show_err("你没有权限使用发布系统请联系xiebojie@360 添加账号");
-            }else if($user['status']!=user_model::STATUS_ENABLE)
-            {
-                show_err("你的账号已禁用");
+                $this->user_id= $_SESSION['signin']['user_id'];
+                $this->username=$_SESSION['signin']['username'];
+                $this->is_admin = $_SESSION['signin']['is_admin'];
             }else
             {
-                $this->username=$this->tpl_vars['username'] = $user['username'];
-                $this->user_id = $user['id'];
-            }*/
+                redirect('/siginin');
+                exit;
+            }
         }
+        $this->assign('is_admin',  $this->is_admin,'username', $this->username);
         $this->layout = new layout();
     }
 

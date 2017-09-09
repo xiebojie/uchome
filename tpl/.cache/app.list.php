@@ -73,6 +73,7 @@
             <th>id</th>
             <th>应用名</th>
             <th>网址</th>
+            <th>token</th>
             <th>负责人</th>
             <th width="155">时间戳</th>
             <th width="140">操作</th>
@@ -82,6 +83,7 @@
             <td><?php echo htmlspecialchars($app['id']);?></td>
             <td><?php echo htmlspecialchars($app['app_name']);?></td>
             <td><?php echo htmlspecialchars($app['app_href']);?></td>
+            <td><?php echo htmlspecialchars(empty($app['token'])?'':$app['token']);?></td>
             <td><?php echo htmlspecialchars($app['auditor']);?></td>
             <td><?php echo htmlspecialchars($app['utime']);?></td>
             <td>

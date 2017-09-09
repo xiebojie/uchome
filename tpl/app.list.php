@@ -31,6 +31,7 @@
             <th>id</th>
             <th>应用名</th>
             <th>网址</th>
+            <th>token</th>
             <th>负责人</th>
             <th width="155">时间戳</th>
             <th width="140">操作</th>
@@ -40,6 +41,7 @@
             <td>{%$app['id']%}</td>
             <td>{%$app['app_name']%}</td>
             <td>{%$app['app_href']%}</td>
+            <td>{%$app['token']|default:''%}</td>
             <td>{%$app['auditor']%}</td>
             <td>{%$app['utime']%}</td>
             <td>
