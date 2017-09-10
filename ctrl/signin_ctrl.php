@@ -7,12 +7,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0
  *
  */
+
 class signin_ctrl extends ctrl
 {
     protected $model;
     protected $signin_model;
+            
     public function __construct()
     {
+        $this->auth_pass=true;
         parent::__construct();
         $this->model = new user_model();
         $this->signin_model = new signin_model();

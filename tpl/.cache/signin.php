@@ -21,8 +21,8 @@
                            placeholder="密码" 
                            data-rule="密码:required" data-target=".form-alert"/>
                 </div>
-                <div class="form-group">
-                    <input type="text" name="img_captcha" class="form-control" 
+                <div class="form-group" id="js-invitation">
+                    <input type="text" name="invitation" class="form-control" 
                         placeholder="邀请码" data-rule="邀请码:required"  data-target=".form-alert"/>
                 </div>
                 <div class="form-group">
@@ -31,6 +31,22 @@
             </form>
         </div>
         <script>
+            $('input[name=mobile]').change(function(){
+                if(this.value==='')
+                {
+                     $('#js-invitation').hide();
+                }
+                $.get('/sigin/exist?mobile='+this.value,function(r){
+                    var resp = $.parseJSON(r);
+                    if(resp.exist)
+                    {
+                        $('#js-invitation').show();
+                        $('input[name=invitatio]').attr('data-rule','');
+                    }else{
+                        $('#js-invitation').hide();
+                    }
+                });
+            }).trigger('change');
             $('form').bind('valid.form', function(){
                 $('form').ajaxSubmit({'success':function(r){
                     var resp = $.parseJSON(r);

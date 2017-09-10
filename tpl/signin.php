@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>uchome login</title>
+        <title>uchome signin</title>
         <link href="/style/bootstrap.min.css" rel="stylesheet"/>
         <link href="/style/ucbase.css" rel="stylesheet" />
         <script src="/script/jquery.min.js"></script>
@@ -21,22 +21,40 @@
                            placeholder="密码" 
                            data-rule="密码:required" data-target=".form-alert"/>
                 </div>
-                <div class="form-group">
-                    <input type="text" name="img_captcha" class="form-control" 
+                <div class="form-group" id="js-invitation">
+                    <input type="text" name="invitation" class="form-control" 
                         placeholder="邀请码" data-rule="邀请码:required"  data-target=".form-alert"/>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">登 &nbsp;&nbsp;&nbsp;录</button>
                 </div>
+                <input name="token" type="hidden" value="{%$_GET['token']|default:''%}" />
+                <input name="refer" type="hidden" value="{%$_GET['refer']|default:''%}" />
             </form>
         </div>
         <script>
+            $('input[name=mobile]').change(function(){
+                if(this.value==='')
+                {
+                     $('#js-invitation').hide();
+                }
+                $.get('/sigin/exist?mobile='+this.value,function(r){
+                    var resp = $.parseJSON(r);
+                    if(resp.exist)
+                    {
+                        $('#js-invitation').show();
+                        $('input[name=invitatio]').attr('data-rule','');
+                    }else{
+                        $('#js-invitation').hide();
+                    }
+                });
+            }).trigger('change');
             $('form').bind('valid.form', function(){
                 $('form').ajaxSubmit({'success':function(r){
                     var resp = $.parseJSON(r);
                     if(resp.error===0)
                     { 
-                        window.location.href='/index'
+                        window.location.href=$('input[name=refer]').val();
                     }else
                     {
                         alert(resp.message);
