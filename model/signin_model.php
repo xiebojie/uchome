@@ -24,4 +24,16 @@ class signin_model extends model
         return self::$db->fetch($sql);
     }
    
+    public static function start_new_session($user_id,$app_id,$client_ip)
+    {
+        $user_id = intval($user_id);
+        $app_id = intval($app_id);
+        $client_ip = addslashes($client_ip);
+        $sid = substr(sha1(getmygid().time().$client_ip),0,32);
+        
+        $sql = "INSERT INTO uc_signin SET user_id=$user_id,app_id=$app_id,client_ip='$client_ip',"
+                . "sid='$sid',ctime=NOW()";
+        self::$db->replace($sql);
+        return $sid;
+    }
 }

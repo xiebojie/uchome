@@ -31,7 +31,7 @@ abstract class ctrl
                 $this->is_admin = $_SESSION['signin']['is_admin'];
             }else
             {
-                redirect('/siginin');
+                redirect('/signin/');
                 exit;
             }
         }

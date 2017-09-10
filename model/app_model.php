@@ -26,5 +26,12 @@ class app_model extends model
         $status = intval($status);
         $sql = "UPDATE ucenter_app SET status=$status WHERE id=$app_id";
         return self::$db->replace($sql);
-    }   
+    }
+    
+    public static function fetch_by_token($token)
+    {
+        $token = addslashes($token);
+        $sql = "SELECT * FROM uc_app WHERE token='$token'";
+        return self::$db->fetch($sql);
+    }
 }

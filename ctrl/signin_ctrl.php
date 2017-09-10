@@ -40,13 +40,28 @@ class signin_ctrl extends ctrl
                     'username' => $user['username'],
                     'is_admin'=>$user['is_admin']
                 );
+                if(!empty($_REQUEST['token']) && !empty($_REQUEST['refer']))
+                {
+                    $app = app_model::fetch_by_token($_REQUEST['token']);
+                    signin_model::start_new_session($user['id'], $app['id'], $_SERVER['REMOTE_ADDR']);
+                    return redirect($_REQUEST['refer']);
+                }
                 return array('error' => 0, 'message' => '登录成功');
             }
         } else
         {
-            if(!empty($_SESSION['signin']) && empty($_REQUEST['token']))
+            if(!empty($_SESSION['signin']) && empty($_GET['token']))
             {
                 return redirect('/');
+            }else if(!empty ($_SESSION['signin'])&& !empty ($_GET['token']) && !empty ($GET['refer']))
+            {
+                $app = app_mode::fetch_by_token($_GET['token']);
+                if(!empty($app))
+                {
+                    $sid= signin_model::start_new_session($_SESSION['signin']['user_id'], $app['id'],
+                        $_SERVER['REMOTE_ADDR']);
+                    return redirect($_GET['refer'].'?sid='.$sid);
+                }
             }
             $this->display('signin.php');
         }
@@ -57,18 +72,20 @@ class signin_ctrl extends ctrl
     {
         $sid = isset($_REQUEST['sid'])?$_REQUEST['sid']:'';
         $signin = $this->signin_model->fetch_by_sid($sid);
-        if(!empty($signin) && $signin['ctime']>'120seconds ago'){
-            //@todo 根据app token
-             return array(
-            'username'=>'xxx',
-            'role',
-            'route'=>array('/aaa/(index|list)','/aaa/form')
-        );
+        if(!empty($signin) && time()-strtotime($signin['ctime'])<90)
+        {
+            $user = $this->user_model->fetch($signin['user_id']);
+            $route_list = $route_model->fetch_by_appid($user['user_id'],$signin['app_id']);
+            return array(
+                'error'=>'',
+                'user_id'=>$user['id'],
+                'username'=>$user['username'],
+                'route'=>$route_list
+            );
         }  else
         {
-            
+            return array('error'=>'invalid sid');
         }
-       
     }
     
     public function logout()
