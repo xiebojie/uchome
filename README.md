@@ -5,7 +5,8 @@
 ##系统安装##
 1. 下载代码文件并解压
 2. 配置nginx 将根目录指向www目录下的index.php
-例如：server {
+例如：
+server {
         listen       80;
         server_name  uchome.com;
         root           /Users/apple/project/uchome/www;
