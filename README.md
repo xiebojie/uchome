@@ -6,7 +6,8 @@
 1. 下载代码文件并解压
 2. 配置nginx 将根目录指向www目录下的index.php
 例如：
-<code>server {
+
+<pre><code> server {
         listen       80;
         server_name  uchome.com;
         root           /Users/apple/project/uchome/www;
@@ -20,6 +21,7 @@
              fastcgi_param  SCRIPT_FILENAME  $document_root/index.php;
              include        fastcgi_params;
          }
-     }</code>
+     }
+</code></pre>
 3. 创建mysql数据库，并倒入根目录下的site.sql 文件
 4. 修改www目录下的index.php 文件的数据库配置常量MYSQL_HOST、MYSQL_PORT、MYSQL_USER、MYSQL_PASSWD指向真实的数据库参数
