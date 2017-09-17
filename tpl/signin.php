@@ -13,17 +13,18 @@
             <form method="post">
                 <div class="form-alert"></div>
                 <div class="form-group">
-                    <input type="text" name="mobile" class="form-control" placeholder="手机号"
-                           data-rule="手机号:required;mobile" data-target=".form-alert"/>
+                    <input type="text" name="email" class="form-control" placeholder="email"
+                           data-rule="email:required;email" data-target=".form-alert"/>
+                </div>
+                <div class="form-group" id="js-invite-field">
+                    <input type="text" name="invitation" class="form-control" style="width: 280px"
+                           placeholder="首次或修改密码需输入邀请码" 
+                           data-rule="首次或修改密码需输入邀请码:required" data-target=".form-alert"/>
                 </div>
                 <div class="form-group">
                     <input type="password" name="passwd" class="form-control" style="width: 280px"
                            placeholder="密码" 
                            data-rule="密码:required" data-target=".form-alert"/>
-                </div>
-                <div class="form-group" id="js-invitation">
-                    <input type="text" name="invitation" class="form-control" 
-                        placeholder="邀请码" data-rule="邀请码:required"  data-target=".form-alert"/>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">登 &nbsp;&nbsp;&nbsp;录</button>
@@ -33,22 +34,23 @@
             </form>
         </div>
         <script>
-            $('input[name=mobile]').change(function(){
-                if(this.value==='')
-                {
-                     $('#js-invitation').hide();
-                }
-                $.get('/sigin/exist?mobile='+this.value,function(r){
-                    var resp = $.parseJSON(r);
-                    if(resp.exist)
-                    {
-                        $('#js-invitation').show();
-                        $('input[name=invitatio]').attr('data-rule','');
-                    }else{
-                        $('#js-invitation').hide();
+            $(function(){
+                $('input[name=email]').isValid(function(valid){
+                    if(valid){
+                        $.get('/signin/status?email='+'',function(status){
+                            if(status==0){
+                                $('.form-alert').text('账号不存在').show();
+                            }else if(status==1){
+                                $('form').validator("setField", "invitation", null);
+                                $('#js-invite-field').hide();
+                            }else {
+                                $('#js-invite-field').show();
+                                $('form').validator("setField", "invitation", 'required');
+                            }
+                        });
                     }
                 });
-            }).trigger('change');
+            });
             $('form').bind('valid.form', function(){
                 $('form').ajaxSubmit({'success':function(r){
                     var resp = $.parseJSON(r);

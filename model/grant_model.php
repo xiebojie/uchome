@@ -9,14 +9,14 @@
  */
 class grant_model extends model
 {
-    protected $primary_table = 'ucenter_route_grant';
+    protected $primary_table = 'uc_route_grant';
     protected $primary_key = 'id';
     
     public function fetch_route_list($role_ids,$app_id=0)
     {   
         $app_id = intval($app_id);
         $role_ids = array_walk($role_ids, 'intval');
-        $sql = sprintf("SELECT * FROM ucenter_route_grant LEFT JOIN route ON route_grant.route_id=route.id WHERE role_id IN('%s')",  implode("','", $role_ids));
+        $sql = sprintf("SELECT * FROM uc_route_grant LEFT JOIN route ON route_grant.route_id=route.id WHERE role_id IN('%s')",  implode("','", $role_ids));
         if($app_id >0) 
         {   
             $sql .=" AND app_id=$app_id";

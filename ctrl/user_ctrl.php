@@ -74,14 +74,15 @@ class user_ctrl extends ctrl
         }
     }
     
-    public function passwd()
+    public function reset()
     {
-        $uid = isset($_REQUEST['id'])?$_REQUEST['id']:-1;
-        $status = isset($_REQUEST['status'])?$_REQUEST['status']:user_model::STATUS_DISABLE;
-        $user = $this->model->fetch($uid);
+        $user_id = isset($_REQUEST['id'])?$_REQUEST['id']:-1;
+        $user = $this->model->fetch($user_id);
         if($_SERVER['REQUEST_METHOD'] == 'POST'&& !empty($user))
         {
-            $this->model->set_status($uid,$status);
+             $valid_data['invitation'] = substr(sha1(time()),0, 6);
+             $valid_data['utime']= 'timestamp';
+             $this->model->update($user_id, $valid_data);
         }
     }
 

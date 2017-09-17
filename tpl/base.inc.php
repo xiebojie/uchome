@@ -28,7 +28,6 @@
                     <li style="border-top: 0.5px solid #e7e7e7">
                         <a href="/"><i class="glyphicon glyphicon-home"></i>首页</a>
                     </li>
-                    <?php if($is_admin):?>
                     <li class="parent"><a href="/app/list">应用列表</a></li>
                     <li class="parent"><a href="/app/form">添加应用</a></li>
                     <li class="parent"><a href="/role/list">角色列表</a></li>
@@ -38,7 +37,6 @@
                     <li class="parent"><a href="/route/grant">路由授权</a></li>
                     <li class="parent"><a href="/user/list">用户列表</a></li>
                     <li class="parent"><a href="/user/form">添加用户</a></li>
-                    <?php endif;?>
                 </ul>
             </div>
             <div class="mainpanel">

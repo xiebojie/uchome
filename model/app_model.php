@@ -24,7 +24,7 @@ class app_model extends model
     {   
         $app_id = intval($app_id);
         $status = intval($status);
-        $sql = "UPDATE ucenter_app SET status=$status WHERE id=$app_id";
+        $sql = "UPDATE uc_app SET status=$status WHERE id=$app_id";
         return self::$db->replace($sql);
     }
     

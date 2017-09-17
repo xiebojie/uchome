@@ -24,14 +24,19 @@ class user_model extends model
     {
         $uid = intval($uid);
         $status = intval($status);
-        $sql = "UPDATE user SET status=$status WHERE id=$uid";
+        $sql = "UPDATE uc_user SET status=$status WHERE id=$uid";
         return self::$db->replace($sql);
     }
     
-    public function fetch_by_username($username)
+    public function fetch_by_email($email)
     {
-        $username = addslashes($username);
-        $sql = "SELECT * FROM user WHERE username='$username'";
+        $email = addslashes($email);
+        $sql = "SELECT * FROM uc_user WHERE email='$email'";
         return self::$db->fetch($sql);
+    }
+    
+    public static function passwd_hash($passwd)
+    {
+        return substr(md5(sha1($passwd)), 0,32);
     }
 }

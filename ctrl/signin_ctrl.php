@@ -25,11 +25,18 @@ class signin_ctrl extends ctrl
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            $mobile = isset($_POST['mobile']) ? $_POST['mobile'] : '';
+            $email = isset($_POST['email']) ? $_POST['email'] : '';
             $passwd = isset($_POST['passwd']) ? $_POST['passwd'] : '';
             $invitation = isset($_POST['invitation'])?$_POST['invitation']:'';
-            $user = $this->model->fetch_by_mobile($mobile);
-            if (empty($user) || user_model::passwd_hash($passwd) != $user['passwd'])
+            $user = $this->model->fetch_by_email($email);
+            if(!empty($invitation) && $invitation==$user['invitation'])
+             {
+                $this->model->update($user['id'], array(
+                    'utime'=>'timestamp',
+                    'passwd'=>  user_model::passwd_hash($passwd),
+                    'invitation'=>''
+                ));
+            }else if (empty($user) || user_model::passwd_hash($passwd) != $user['passwd'])
             {
                 return array('error' => 1, 'message' => '帐号密码错误');
             }  else if(empty ($user['passwd']) && $user['invitation']!=$invitation)
@@ -91,6 +98,21 @@ class signin_ctrl extends ctrl
         }
     }
     
+    
+    public function status()
+    {
+        $email = isset($_REQUEST['email'])?$_REQUEST['email']:'';
+        $user = $this->model->fetch_by_email($email);
+        if(empty($user))
+        {
+            echo '0';
+        }else if(!empty ($user['invitation'])){
+            echo  '1';
+        }else {
+            echo  '2';
+        }
+    }
+
     public function logout()
     {
         unset($_SESSION['signin']);
