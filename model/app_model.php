@@ -34,4 +34,26 @@ class app_model extends model
         $sql = "SELECT * FROM uc_app WHERE token='$token'";
         return self::$db->fetch($sql);
     }
+    
+   public function fetch_all($filter_where = array(), $offset = 0, $limit_size = 20)
+   {
+        $offset = abs($offset);
+        $limit_size = abs($limit_size);
+        $sql = sprintf("SELECT * FROM %s ", $this->primary_table);
+        if (!empty($filter_where))
+        {
+            $sql .=" WHERE " . self::sql_fields($filter_where);
+        }
+        $sql .=" ORDER BY id DESC ";
+        if ($limit_size > 0)
+        {
+            $sql.=" LIMIT $offset, $limit_size";
+        }
+        $list= array();
+        foreach (self::$db->fetch_all($sql) as $row)
+        {
+            $list[$row['id']]=$row;
+        }
+        return $list;
+    }
 }

@@ -40,11 +40,10 @@ class route_model extends model
         return array($row_list, $count);
     }
     
-    public function fetch_route_by_role($role_id,$app_id=-1)
+    public function fetch_app_route($app_id=-1)
     {
         $app_id = intval($app_id);
-        $sql = "SELECT * FROM uc_route_grant LEFT JOIN uc_route ON uc_route.id=uc_route_grant.route_id "
-                . "WHERE role_id=$role_id";
+        $sql = "SELECT * FROM uc_route ";
         if($app_id>0)
         {
             $sql .= " AND app_id=$app_id";
@@ -57,12 +56,17 @@ class route_model extends model
         return $route_list;
     }
     
-    public function fetch_route_by_user($role_ids, $appid)
+    public function fetch_route_granted($role_ids, $appid=-1)
     {
         $role_ids = is_array($role_ids)?:array($role_ids);
         $appid = intval($appid);
         $sql = "SELECT * FROM uc_route_grant LEFT JOIN uc_route ON uc_route_grant.route_id=uc_route.id "
-                . " WHERE app_id=$appid AND role_id IN ('". implode("','", $role_ids)."')";
+                . " WHERE role_id IN ('". implode("','", $role_ids)."')";
+        if($appid>0)
+        {
+            $sql .=" AND app_id=$appid";
+        }
+        $route_list = array();
         foreach (self::$db->fetch_all($sql) as $row)
         {
             $route_list[$row['route_id']] = $row;

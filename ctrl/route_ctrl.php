@@ -80,12 +80,14 @@ class route_ctrl extends ctrl
     {
         $role_model = new role_model();
         $role = $role_model->fetch($role_id);
-        $route_list = $this->model->fetch_route_by_role($role_id);
-        $this->assign('role', $role,'route_list', $route_list, 'app_list', $this->app_model->fetch_all());
+        $route_list = $this->model->fetch_app_route();
+        $granted = $this->model->fetch_route_granted($role_id);
+        $this->assign('role', $role,'route_list', $route_list,'granted',$granted, 'app_list', 
+                $this->app_model->fetch_all());
         $this->display('route.grant.php');
     }
 
-     public function grantdo()
+     public function grantedit()
     {
         if($_SERVER['REQUEST_METHOD']=='POST')
         {

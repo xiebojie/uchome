@@ -36,35 +36,41 @@
             <th>路由</th>
             <th width="130">操作</th>
         </tr>
-        <tr>
+        <?php foreach ($route_list as $_appid=>$_routes):?>
+           <tr>
             <th><div class="checkbox">
-                <label><input type="checkbox" name="app_id" class="check-all" title="全选"/>软件发布</label>
+                <label><input type="checkbox" name="app_id" value="{%$_appid%}"class="check-all" title="全选"/>
+                    <?php echo $app_list[$_appid]['app_name']?></label>
                 </div>
             </th>
             <td>
                 <div class="checkbox">
-                 <label><input type="checkbox" name="route_ids[]" />舒服的沙发</label>
-                <label><input type="checkbox" name="route_ids[]" /> 需件</label>
+                <?php foreach ($_routes as $_r):?>
+                    <label><input type="checkbox" name="route_ids[]" value="<?php echo $_r['id']?>" />
+                        <?php echo $_r['route_name']?></label>
+                <?php endforeach;?>
                 </div>
             </td>
-            <td align="center"><a href="" class="btn btn-primary ajax-post">提交</a></td>
-        </tr>
-        <?php foreach ($route_list as $_appid=>$_routes):?>
-        <tr>
-            <td class="checkbox"><label><input type="checkbox" name="app_id"/>软台</label></td>
-            <td class="checkbox">
-                <label><input type="checkbox" name="route_ids[]" />需件</label>
-                <label><input type="checkbox" name="route_ids[]" />需件</label>
-                <label><input type="checkbox" name="route_ids[]" />需件</label>
+            <td align="center"><a href="/route/grantedit/<?php echo $_appid?>" 
+                                  class="btn btn-warning js-grantedit">提交</a>
             </td>
-            <td align="center"><a href="" class="btn btn-primary ajax-post">提交</a></td>
         </tr>
         <?php endforeach;?>
     </table>
 </div>
 <script>
     $('.check-all').click(function(){
-        $(this).parent().parent().parent().next('td').find('input[type=checkbox]').checked=this.checked;
+        $(this).parent().parent().parent().next().find('input[type=checkbox]').attr('checked',this.checked);
+    });
+    $('.js-grantedit').click(function(){
+        var list=[];
+        $(this).parent('td').parent().prev().find('input[type=checkbox').each(function(ele){
+           
+        });
+        $.post(this.href,{},function(r){
+            
+        });
+        return false;
     });
 </script>
 {%endblock%}
