@@ -11,8 +11,9 @@
     </ul>
 </div>
 <div class="contentpanel">
+    
     <form class="search-form">
-        <div class="alert alert-warning">角色名：</div>
+        <div class="alert alert-warning">角色名：{%$role['role_name']%}</div>
         <table class="search-table" style="width:228px">
             <tr>
                 <th>应用</th>
@@ -28,6 +29,7 @@
             </tr>
         </table>
     </form>
+    
     <table class="table table-bordered table-striped">
         <tr>
             <th width="160">应用</th>
@@ -35,7 +37,10 @@
             <th width="130">操作</th>
         </tr>
         <tr>
-            <th><div class="checkbox"><label><input type="checkbox" name="app_id"/>软件发布</label></div></th>
+            <th><div class="checkbox">
+                <label><input type="checkbox" name="app_id" class="check-all" title="全选"/>软件发布</label>
+                </div>
+            </th>
             <td>
                 <div class="checkbox">
                  <label><input type="checkbox" name="route_ids[]" />舒服的沙发</label>
@@ -58,6 +63,8 @@
     </table>
 </div>
 <script>
-    
+    $('.check-all').click(function(){
+        $(this).parent().parent().parent().next('td').find('input[type=checkbox]').checked=this.checked;
+    });
 </script>
 {%endblock%}

@@ -29,22 +29,17 @@ class signin_ctrl extends ctrl
             $passwd = isset($_POST['passwd']) ? $_POST['passwd'] : '';
             $invitation = isset($_POST['invitation'])?$_POST['invitation']:'';
             $user = $this->model->fetch_by_email($email);
-            if(!empty($invitation) && $invitation==$user['invitation'])
+            if(!empty($invitation) && $invitation==$user['invitation']
+                    ||user_model::passwd_hash($passwd) == $user['passwd'])
              {
-                $this->model->update($user['id'], array(
-                    'utime'=>'timestamp',
-                    'passwd'=>  user_model::passwd_hash($passwd),
-                    'invitation'=>''
-                ));
-            }else if (empty($user) || user_model::passwd_hash($passwd) != $user['passwd'])
-            {
-                return array('error' => 1, 'message' => '帐号密码错误');
-            }  else if(empty ($user['passwd']) && $user['invitation']!=$invitation)
-            {
-                return array('error'=>2, 'message'=>'请输入邀请码');
-            } else
-            {
-                //@todo 注册一个 sid 以后可以根据sid获得用户的信息，
+                if(!empty($user['invitation']))
+                {
+                    $this->model->update($user['id'], array(
+                        'utime'=>'timestamp',
+                        'passwd'=>  user_model::passwd_hash($passwd),
+                        'invitation'=>''
+                    ));
+                }
                 $_SESSION['signin'] = array(
                     'user_id' => $user['id'],
                     'username' => $user['username'],
@@ -57,7 +52,13 @@ class signin_ctrl extends ctrl
                     return redirect($_REQUEST['refer']);
                 }
                 return array('error' => 0, 'message' => '登录成功');
-            }
+            }else if (empty($user['invitation']) || user_model::passwd_hash($passwd) != $user['passwd'])
+            {
+                return array('error' => 1, 'message' => '帐号密码错误');
+            }  else if(empty ($user['passwd']) && $user['invitation']!=$invitation)
+            {
+                return array('error'=> 2, 'message'=>'邀请码错误');
+            } 
         } else
         {
             if(!empty($_SESSION['signin']) && empty($_GET['token']))

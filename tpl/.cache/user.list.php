@@ -34,7 +34,6 @@
                     <li class="parent"><a href="/role/form">添加角色</a></li>
                     <li class="parent"><a href="/route/list">路由列表</a></li>
                     <li class="parent"><a href="/route/form">添加路由</a></li>
-                    <li class="parent"><a href="/route/grant">路由授权</a></li>
                     <li class="parent"><a href="/user/list">用户列表</a></li>
                     <li class="parent"><a href="/user/form">添加用户</a></li>
                 </ul>

@@ -48,7 +48,7 @@
         <?php foreach ($route_list as $_route):?>
         <tr>
             <td align="center">{%$_route['id']%}</td>
-            <td>{%$_route['app_id']%}</td>
+            <td>{%$_route['app_name']%}</td>
             <td>{%$_route['route_name']%}</td>
             <td>{%$_route['match_schema']%}</td>
             <td>{%$_route['auditor']%}</td>

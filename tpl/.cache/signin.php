@@ -18,8 +18,8 @@
                 </div>
                 <div class="form-group" id="js-invite-field">
                     <input type="text" name="invitation" class="form-control" style="width: 280px"
-                           placeholder="首次或修改密码需输入邀请码" 
-                           data-rule="首次或修改密码需输入邀请码:required" data-target=".form-alert"/>
+                           placeholder="首次登陆或修改密码需输入邀请码" 
+                           data-rule="首次登陆或修改密码需输入邀请码:required" data-target=".form-alert"/>
                 </div>
                 <div class="form-group">
                     <input type="password" name="passwd" class="form-control" style="width: 280px"
@@ -51,6 +51,7 @@
                     }
                 });
             });
+            
             $('form').bind('valid.form', function(){
                 $('form').ajaxSubmit({'success':function(r){
                     var resp = $.parseJSON(r);
@@ -59,7 +60,7 @@
                         window.location.href=$('input[name=refer]').val();
                     }else
                     {
-                        alert(resp.message);
+                        $('.form-alert').text(resp.message);
                     }
                 }});
                 return false;

@@ -75,14 +75,17 @@ class route_ctrl extends ctrl
             $this->model->delete($route_id);
         }
     }
-    public function grant()
+    
+    public function grant($role_id=-1)
     {
-        $role_list = array();
-        $this->assign('role_list', $role_list,'app_list',  $this->app_model->fetch_all());
+        $role_model = new role_model();
+        $role = $role_model->fetch($role_id);
+        $route_list = $this->model->fetch_route_by_role($role_id);
+        $this->assign('role', $role,'route_list', $route_list, 'app_list', $this->app_model->fetch_all());
         $this->display('route.grant.php');
     }
 
-     public function grant_form()
+     public function grantdo()
     {
         if($_SERVER['REQUEST_METHOD']=='POST')
         {

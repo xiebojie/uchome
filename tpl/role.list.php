@@ -45,7 +45,7 @@
             <td>{%$_role['auditor']%}</td>
             <td>{%$_role['utime']%}</td>
             <td>
-                <a href="/route/grant?role_id={%$_role['id']%}" class="btn btn-warning"> 授权</a>
+                <a href="/route/grant/{%$_role['id']%}" class="btn btn-warning"> 授权</a>
                 <a href="./delete/{%$_role['id']%}" class="btn btn-danger ajax-post" data-confirm="确定要删除吗">删除</a>
             </td>
         </tr>
