@@ -25,4 +25,3 @@
 </code></pre>
 3. 创建mysql数据库，并倒入根目录下的site.sql 文件
 4. 修改www目录下的index.php 文件的数据库配置常量MYSQL_HOST、MYSQL_PORT、MYSQL_USER、MYSQL_PASSWD指向真实的数据库参数
-<img src="https://ps.ssl.qhimg.com/dmfd/420_627_/t01e27c9ed6e4e0da15.jpg"/>
